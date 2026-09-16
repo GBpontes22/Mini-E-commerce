@@ -21,6 +21,14 @@ class ProdutoForm(forms.ModelForm):
         fields = ["vendedor", "nome", "preco", "estoque"]
 
 
+class ProdutoDadosForm(forms.ModelForm):
+    """Altera somente o vendedor e o preco de um produto."""
+
+    class Meta:
+        model = Produto
+        fields = ["vendedor", "preco"]
+
+
 class EstoqueForm(forms.ModelForm):
     """Altera somente a quantidade em estoque de um produto."""
 

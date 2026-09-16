@@ -18,7 +18,10 @@
         <tr>
             <td>{{ produto.nome }}</td>
             <td>{{ produto.vendedor }}</td>
-            <td>R$ {{ produto.preco }}</td>
+            <td>
+                R$ {{ produto.preco }}<br>
+                <a href="{% url 'produto_editar' produto.id %}">Editar preco e vendedor</a>
+            </td>
             <td>
                 {{ produto.estoque }}<br>
                 <a href="{% url 'produto_estoque' produto.id %}">Editar estoque</a>
