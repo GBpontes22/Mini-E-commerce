@@ -2,7 +2,7 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import ItemPedidoForm, ProdutoForm, VendedorForm
+from .forms import ItemPedidoForm, PedidoForm, ProdutoForm, VendedorForm
 from .models import Pedido, Produto, Vendedor
 
 
@@ -54,11 +54,15 @@ def pedido_lista(request):
 
 
 def pedido_novo(request):
-    """Cria um pedido vazio; os itens sao adicionados depois."""
+    """Cria um pedido com cupom opcional; os itens sao adicionados depois."""
     if request.method == "POST":
-        pedido = Pedido.objects.create()
-        return redirect("pedido_detalhe", pedido_id=pedido.id)
-    return render(request, "ecommerce/pedido_novo.html")
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido = form.save()
+            return redirect("pedido_detalhe", pedido_id=pedido.id)
+    else:
+        form = PedidoForm()
+    return render(request, "ecommerce/form.html", {"form": form, "titulo": "Novo pedido"})
 
 
 def pedido_detalhe(request, pedido_id):

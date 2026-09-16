@@ -2,7 +2,7 @@
 
 from django import forms
 
-from .models import ItemPedido, Produto, Vendedor
+from .models import ItemPedido, Pedido, Produto, Vendedor
 
 
 class VendedorForm(forms.ModelForm):
@@ -19,6 +19,14 @@ class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produto
         fields = ["vendedor", "nome", "preco", "estoque"]
+
+
+class PedidoForm(forms.ModelForm):
+    """Cria um pedido com cupom opcional."""
+
+    class Meta:
+        model = Pedido
+        fields = ["cupom"]
 
 
 class ItemPedidoForm(forms.ModelForm):

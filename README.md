@@ -20,8 +20,9 @@ Carrinho/pedido com calculo de total.
 
 ## Como rodar
 
+No terminal, entre na pasta que contem `manage.py` e execute:
+
 ```bash
-cd mercadinho
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -35,3 +36,5 @@ Acesse:
 ```text
 http://127.0.0.1:8000/
 ```
+
+Para cadastrar cupons, acesse `/admin/` com o superusuario criado acima.
