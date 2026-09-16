@@ -1,0 +1,17 @@
+{% extends "ecommerce/base.html" %}
+
+{% block conteudo %}
+{# A view envia a lista de vendedores pelo contexto. #}
+<h2>Vendedores</h2>
+
+<p><a class="botao" href="{% url 'vendedor_novo' %}">Novo vendedor</a></p>
+
+<ul class="lista">
+    {# Mostra cada vendedor ou uma mensagem quando a lista esta vazia. #}
+    {% for vendedor in vendedores %}
+        <li>{{ vendedor.nome }} - {{ vendedor.email }}</li>
+    {% empty %}
+        <li>Nenhum vendedor cadastrado.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

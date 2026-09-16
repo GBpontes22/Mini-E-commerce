@@ -1,0 +1,2 @@
+# Framework usado pelo projeto.
+Django==6.0.4

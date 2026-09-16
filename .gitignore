@@ -1,0 +1,8 @@
+# Ambiente virtual e arquivos gerados localmente.
+venv/
+__pycache__/
+*.py[cod]
+db.sqlite3
+# Configuracoes privadas ou especificas do editor.
+.env
+.vscode/

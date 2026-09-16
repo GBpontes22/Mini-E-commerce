@@ -1,0 +1,39 @@
+{% extends "ecommerce/base.html" %}
+
+{% block conteudo %}
+{# A pagina mostra um pedido e permite acrescentar mais itens. #}
+<h2>Pedido #{{ pedido.id }}</h2>
+
+<p><a class="botao" href="{% url 'item_novo' pedido.id %}">Adicionar item</a></p>
+
+<table>
+    <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Preco unitario</th>
+        <th>Subtotal</th>
+    </tr>
+    {# Cada linha usa o preco gravado no momento em que o item foi incluido. #}
+    {% for item in pedido.itens.all %}
+        <tr>
+            <td>{{ item.produto.nome }}</td>
+            <td>{{ item.quantidade }}</td>
+            <td>R$ {{ item.preco_unitario }}</td>
+            <td>R$ {{ item.subtotal }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="4">Nenhum item no pedido.</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<div class="resumo">
+{# Os calculos ficam nos models; o template apenas exibe os resultados. #}
+<p>Subtotal: R$ {{ pedido.subtotal }}</p>
+{% if pedido.cupom %}
+    <p>Cupom: {{ pedido.cupom.codigo }} - {{ pedido.cupom.desconto_percentual }}%</p>
+{% endif %}
+<p><strong>Total: R$ {{ pedido.total }}</strong></p>
+</div>
+{% endblock %}

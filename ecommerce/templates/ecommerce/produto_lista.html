@@ -1,0 +1,30 @@
+{% extends "ecommerce/base.html" %}
+
+{% block conteudo %}
+{# A view busca produtos e seus vendedores antes de renderizar a tabela. #}
+<h2>Produtos</h2>
+
+<p><a class="botao" href="{% url 'produto_novo' %}">Novo produto</a></p>
+
+<table>
+    <tr>
+        <th>Produto</th>
+        <th>Vendedor</th>
+        <th>Preco</th>
+        <th>Estoque</th>
+    </tr>
+    {# Cada linha mostra o preco atual e o estoque disponivel. #}
+    {% for produto in produtos %}
+        <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.vendedor }}</td>
+            <td>R$ {{ produto.preco }}</td>
+            <td>{{ produto.estoque }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="4">Nenhum produto cadastrado.</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

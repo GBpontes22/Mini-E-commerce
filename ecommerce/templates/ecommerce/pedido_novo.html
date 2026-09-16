@@ -1,0 +1,13 @@
+{% extends "ecommerce/base.html" %}
+
+{% block conteudo %}
+{# O pedido comeca vazio; os itens sao adicionados na pagina seguinte. #}
+<h2>Novo pedido</h2>
+
+<form method="post" class="formulario">
+    {% csrf_token %}
+    <button type="submit">Criar pedido</button>
+</form>
+
+<p><a href="{% url 'pedido_lista' %}">Voltar</a></p>
+{% endblock %}

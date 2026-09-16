@@ -1,0 +1,20 @@
+{% extends "ecommerce/base.html" %}
+
+{% block conteudo %}
+{# Cada pedido aponta para sua pagina de detalhes. #}
+<h2>Pedidos</h2>
+
+<p><a class="botao" href="{% url 'pedido_novo' %}">Novo pedido</a></p>
+
+<ul class="lista">
+    {# pedido.total e calculado no model a partir dos itens. #}
+    {% for pedido in pedidos %}
+        <li>
+            <a href="{% url 'pedido_detalhe' pedido.id %}">Pedido #{{ pedido.id }}</a>
+            - Total: R$ {{ pedido.total }}
+        </li>
+    {% empty %}
+        <li>Nenhum pedido cadastrado.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

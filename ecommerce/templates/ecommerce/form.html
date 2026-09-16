@@ -1,0 +1,16 @@
+{% extends "ecommerce/base.html" %}
+
+{% block conteudo %}
+{# Este template atende os formularios de vendedor, produto e item. #}
+<h2>{{ titulo }}</h2>
+
+<form method="post" class="formulario">
+    {# CSRF protege o envio; as_p desenha os campos e seus erros. #}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+</form>
+
+{# Retorna para a pagina anterior no historico do navegador. #}
+<p><a href="javascript:history.back()">Voltar</a></p>
+{% endblock %}

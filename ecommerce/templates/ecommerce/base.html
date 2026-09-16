@@ -1,0 +1,29 @@
+<!doctype html>
+{% load static %}
+{# Layout compartilhado pelas paginas; static encontra o CSS do app. #}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mini E-commerce</title>
+    <link rel="stylesheet" href="{% static 'ecommerce/style.css' %}">
+</head>
+<body>
+    <header class="topo">
+        <div class="container">
+            <h1>Mini E-commerce</h1>
+            {# Os nomes das rotas sao definidos em ecommerce/urls.py. #}
+            <nav>
+                <a href="{% url 'produto_lista' %}">Produtos</a>
+                <a href="{% url 'vendedor_lista' %}">Vendedores</a>
+                <a href="{% url 'pedido_lista' %}">Pedidos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container conteudo">
+        {# Cada pagina substitui este bloco pelo seu conteudo. #}
+        {% block conteudo %}{% endblock %}
+    </main>
+</body>
+</html>
