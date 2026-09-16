@@ -22,12 +22,19 @@ class ProdutoForm(forms.ModelForm):
 
 
 class ProdutoEdicaoForm(forms.ModelForm):
-    """Altera vendedor, preco e estoque de um produto."""
+    """Altera vendedor, nome do vendedor, preco e estoque."""
+
+    novo_nome_vendedor = forms.CharField(
+        label="Novo nome do vendedor (opcional)",
+        max_length=120,
+        required=False,
+        help_text="A mudanca aparece em todos os produtos deste vendedor.",
+    )
 
     class Meta:
         model = Produto
-        fields = ["vendedor", "preco", "estoque"]
-        labels = {"vendedor": "Nome do vendedor"}
+        fields = ["vendedor", "novo_nome_vendedor", "preco", "estoque"]
+        labels = {"vendedor": "Vendedor"}
 
 
 class PedidoForm(forms.ModelForm):

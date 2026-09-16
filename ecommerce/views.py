@@ -1,5 +1,6 @@
 """Recebe requisicoes, consulta o banco e escolhe as paginas exibidas."""
 
+from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ItemPedidoForm, PedidoForm, ProdutoEdicaoForm, ProdutoForm, VendedorForm
@@ -48,12 +49,17 @@ def produto_novo(request):
 
 
 def produto_editar(request, produto_id):
-    """Altera vendedor, preco e estoque do produto."""
+    """Altera vendedor, seu nome, preco e estoque do produto."""
     produto = get_object_or_404(Produto, id=produto_id)
     if request.method == "POST":
         form = ProdutoEdicaoForm(request.POST, instance=produto)
         if form.is_valid():
-            form.save()
+            with transaction.atomic():
+                produto = form.save()
+                novo_nome = form.cleaned_data["novo_nome_vendedor"]
+                if novo_nome:
+                    produto.vendedor.nome = novo_nome
+                    produto.vendedor.save(update_fields=["nome"])
             return redirect("produto_lista")
     else:
         form = ProdutoEdicaoForm(instance=produto)
