@@ -2,7 +2,7 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import ItemPedidoForm, PedidoForm, ProdutoForm, VendedorForm
+from .forms import EstoqueForm, ItemPedidoForm, PedidoForm, ProdutoForm, VendedorForm
 from .models import Pedido, Produto, Vendedor
 
 
@@ -45,6 +45,19 @@ def produto_novo(request):
     else:
         form = ProdutoForm()
     return render(request, "ecommerce/form.html", {"form": form, "titulo": "Novo produto"})
+
+
+def produto_estoque(request, produto_id):
+    """Mostra o estoque atual e salva uma nova quantidade."""
+    produto = get_object_or_404(Produto, id=produto_id)
+    if request.method == "POST":
+        form = EstoqueForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect("produto_lista")
+    else:
+        form = EstoqueForm(instance=produto)
+    return render(request, "ecommerce/form.html", {"form": form, "titulo": f"Editar estoque: {produto.nome}"})
 
 
 def pedido_lista(request):

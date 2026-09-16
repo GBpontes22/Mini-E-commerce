@@ -21,6 +21,14 @@ class ProdutoForm(forms.ModelForm):
         fields = ["vendedor", "nome", "preco", "estoque"]
 
 
+class EstoqueForm(forms.ModelForm):
+    """Altera somente a quantidade em estoque de um produto."""
+
+    class Meta:
+        model = Produto
+        fields = ["estoque"]
+
+
 class PedidoForm(forms.ModelForm):
     """Cria um pedido com cupom opcional."""
 
