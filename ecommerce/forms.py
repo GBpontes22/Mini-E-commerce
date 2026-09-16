@@ -21,20 +21,13 @@ class ProdutoForm(forms.ModelForm):
         fields = ["vendedor", "nome", "preco", "estoque"]
 
 
-class ProdutoDadosForm(forms.ModelForm):
-    """Altera somente o vendedor e o preco de um produto."""
+class ProdutoEdicaoForm(forms.ModelForm):
+    """Altera vendedor, preco e estoque de um produto."""
 
     class Meta:
         model = Produto
-        fields = ["vendedor", "preco"]
-
-
-class EstoqueForm(forms.ModelForm):
-    """Altera somente a quantidade em estoque de um produto."""
-
-    class Meta:
-        model = Produto
-        fields = ["estoque"]
+        fields = ["vendedor", "preco", "estoque"]
+        labels = {"vendedor": "Nome do vendedor"}
 
 
 class PedidoForm(forms.ModelForm):

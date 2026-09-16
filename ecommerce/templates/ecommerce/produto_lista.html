@@ -12,24 +12,24 @@
         <th>Vendedor</th>
         <th>Preco</th>
         <th>Estoque</th>
+        <th>Acao</th>
     </tr>
     {# Cada linha mostra o preco atual e o estoque disponivel. #}
     {% for produto in produtos %}
         <tr>
             <td>{{ produto.nome }}</td>
             <td>{{ produto.vendedor }}</td>
+            <td>R$ {{ produto.preco }}</td>
+            <td>{{ produto.estoque }}</td>
             <td>
-                R$ {{ produto.preco }}<br>
-                <a href="{% url 'produto_editar' produto.id %}">Editar preco e vendedor</a>
-            </td>
-            <td>
-                {{ produto.estoque }}<br>
-                <a href="{% url 'produto_estoque' produto.id %}">Editar estoque</a>
+                <form action="{% url 'produto_editar' produto.id %}" method="get">
+                    <button type="submit">Editar</button>
+                </form>
             </td>
         </tr>
     {% empty %}
         <tr>
-            <td colspan="4">Nenhum produto cadastrado.</td>
+            <td colspan="5">Nenhum produto cadastrado.</td>
         </tr>
     {% endfor %}
 </table>
